@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -20,6 +21,15 @@ class Category(models.Model):
 
     def __repr__(self):
         return f"Category: {self.title}, pk={self.pk}"
+
+    def get_parent_photo(self):
+        if self.image:
+            return self.image.url
+        else:
+            return "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fphoto-coming-soon-icon&psig=AOvVaw0lCL03bQtYz6HWm-kS6Ho8&ust=1755875232681000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNDU1s6XnI8DFQAAAAAdAAAAABAV"
+
+    def get_absolute_url(self):
+        return reverse("shop:category_detail", kwargs={"slug": self.slug})
 
 
 class Product(models.Model):
