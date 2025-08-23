@@ -23,5 +23,4 @@ class SubCategories(ListView):
     def get_queryset(self):
         parent_category = get_object_or_404(Category, slug=self.kwargs["slug"])
         products = Product.objects.filter(category__parent=parent_category).order_by("?")
-
         return products

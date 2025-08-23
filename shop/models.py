@@ -51,6 +51,15 @@ class Product(models.Model):
     def __repr__(self):
         return f"Product: {self.title}, pk={self.pk}"
 
+    def get_absolute_url(self):
+        pass
+
+    def get_first_photo(self):
+        if self.images.first():
+            return self.images.first().image.url
+        else:
+            return "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fphoto-coming-soon-icon&psig=AOvVaw0lCL03bQtYz6HWm-kS6Ho8&ust=1755875232681000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNDU1s6XnI8DFQAAAAAdAAAAABAV"
+
 
 class Gallery(models.Model):
     image = models.ImageField(upload_to="products/")
